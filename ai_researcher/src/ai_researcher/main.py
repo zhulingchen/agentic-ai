@@ -34,8 +34,9 @@ def train():
     Train the crew for a given number of iterations.
     """
     inputs = {
-        "topic": "AI LLMs",
-        'current_year': str(datetime.now().year)
+        'topic': 'Large Language Models (LLM)',
+        'current_year': str(datetime.now().year),
+        'current_month': str(datetime.now().month),
     }
     try:
         AiResearcher().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
@@ -58,8 +59,9 @@ def test():
     Test the crew execution and returns the results.
     """
     inputs = {
-        "topic": "AI LLMs",
-        "current_year": str(datetime.now().year)
+        'topic': 'Large Language Models (LLM)',
+        'current_year': str(datetime.now().year),
+        'current_month': str(datetime.now().month),
     }
 
     try:
