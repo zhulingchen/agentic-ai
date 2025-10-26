@@ -1,9 +1,12 @@
 research_task:
   description: >
     Conduct a thorough research about {topic}.
-    Make sure you find any interesting and relevant information given the current year/month is {current_year}/{current_month}.
+    Make sure you find any interesting and relevant information about {topic}.
+    Make sure your research is as deep as possible and up to date to the current year and month.
+    Include some interesting github repositories and projects that are related to the topic.
+    The current year is {current_year}, and the current month is {current_month}.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
+    Cover one specific topic in {topic} and provide the most detailed and relevant information about it.
   agent: researcher
 
 reporting_task:
