@@ -14,3 +14,6 @@ reporting_task:
     A fully fledged report with the main topics, each with a full section of information.
     Formatted as markdown without '```'
   agent: reporter
+  context:
+    - research_task
+  output_file: outputs/report.md
