@@ -4,6 +4,8 @@ from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import SerperDevTool
 from typing import List
 
+from .tools.pushover_tool import PushoverNotificationTool
+
 @CrewBase
 class AiResearcher():
     """AiResearcher crew"""
@@ -11,16 +13,15 @@ class AiResearcher():
     agents: List[BaseAgent]
     tasks: List[Task]
 
-    def __init__(self):
-        serper_tool = SerperDevTool()
-        self.tools = [serper_tool]
+    serper_tool = SerperDevTool()
+    pushover_notification_tool = PushoverNotificationTool()
 
     @agent
     def researcher(self) -> Agent:
         return Agent(
             config=self.agents_config['researcher'],
             verbose=True,
-            tools=self.tools,
+            tools=[self.serper_tool],
         )
 
     @agent
@@ -28,6 +29,7 @@ class AiResearcher():
         return Agent(
             config=self.agents_config['reporter'],
             verbose=True,
+            tools=[self.pushover_notification_tool],
         )
 
     @task
