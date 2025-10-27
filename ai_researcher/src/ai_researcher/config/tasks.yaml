@@ -1,22 +1,118 @@
 research_task:
   description: >
-    Conduct a thorough research about {topic}.
-    Make sure you find any interesting and relevant information about {topic}.
-    Make sure your research is as deep as possible and as up to date as possible.
-    Include some interesting github repositories and projects that are related to the topic.
-    The current date is {current_date}.
+    Conduct comprehensive research on {topic}, focusing on one specific subtopic that represents
+    the most significant recent development or emerging trend.
+    
+    Your research must:
+    - Identify the most impactful recent advancement (within the last 3-6 months)
+    - Analyze technical implementations with concrete examples
+    - Locate 3-5 notable GitHub repositories with detailed descriptions
+    - Include quantitative data (adoption rates, performance metrics, benchmarks)
+    - Provide sources with URLs for every claim
+    - Current date: {current_date}
+    
+    CRITICAL: Focus on depth over breadth. One topic explored thoroughly is better than 
+    three topics covered superficially.
+    
   expected_output: >
-    Cover one specific topic in {topic} and provide the most detailed and relevant information about it.
+    A deeply researched analysis (800-1200 words) covering ONE specific subtopic in {topic}.
+    
+    Your output MUST include:
+    1. Executive summary (2-3 sentences) explaining why this topic matters now
+    2. Technical deep-dive with specific implementation details, not just concepts
+    3. Real-world applications with named companies/projects and measurable outcomes
+    4. Code snippets or architectural approaches described in detail
+    5. For each GitHub repository (3-5 total): name, stars, what problem it solves, and what makes its approach unique
+    6. Future implications supported by expert opinions or research papers
+    7. All claims cited with source URLs
+    
+    Quality standards - your research should include:
+    - At least 5 specific examples with company/project names
+    - At least 3 quantitative data points (percentages, metrics, benchmark scores)
+    - Minimum 5 distinct sources with URLs
+    - Focus on developments from the last 3-6 months
+    
   agent: researcher
 
 reporting_task:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Transform the research into an engaging, educational report that balances technical depth
+    with readability. Write in prose paragraphs with narrative flow - NO bullet points except
+    in the Key Takeaways and Sources sections.
+    
+    Your approach:
+    - Open with a compelling hook that explains immediate relevance
+    - Expand each research point into fully developed paragraphs (4-8 sentences each) with smooth transitions
+    - Include concrete examples: "For instance, Company X achieved Y by doing Z"
+    - Add context: explain WHY something matters, not just WHAT it is
+    - Use analogies or comparisons to clarify complex ideas
+    - End with actionable insights
+    
+    CRITICAL CONSTRAINTS:
+    - Write in paragraphs, NOT bullet points (except for Key Takeaways and Sources)
+    - Each main section must contain 3-6 full paragraphs
+    - Minimum word count: 1200 words
+    - Include at least 5 concrete examples with specific details (names, metrics, dates)
+    - Explain all technical terms on first use
+    
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-    Send a push notification with the title and the complete report content using the `PushoverNotificationTool`.
+    A publication-quality report (1200-1800 words) formatted as markdown without code fences (```).
+    
+    Required structure:
+    
+    # [Compelling Title That Captures the Main Insight]
+    
+    ## Executive Summary
+    [2-3 sentences capturing the key finding and its significance]
+    
+    ## Introduction
+    [2-3 paragraphs setting context and explaining why this matters now. Include a specific
+    statistic or recent event that demonstrates relevance.]
+    
+    ## Deep Dive: [Specific Topic]
+    [4-6 paragraphs exploring the topic in depth. Each paragraph should:
+    - Start with a clear topic sentence
+    - Include at least one concrete example with specifics (company names, metrics, dates)
+    - Explain technical concepts in accessible language
+    - Connect to broader trends or implications
+    - Flow naturally to the next paragraph]
+    
+    ## Real-World Applications
+    [3-4 paragraphs with detailed case studies. Format each as:
+    "At [Company/Project], engineers implemented [specific approach] to solve [specific problem].
+    The result was [quantifiable outcome]. This demonstrates [insight]."]
+    
+    ## Notable Projects & Tools
+    [For each of 3-5 projects, write a full paragraph (not bullets) covering:
+    - Project name and GitHub link
+    - The specific problem it addresses  
+    - What makes its approach unique or innovative
+    - Adoption metrics or community response
+    - A technical detail that showcases its design philosophy]
+    
+    ## Future Outlook
+    [2-3 paragraphs discussing:
+    - Emerging trends building on this development
+    - Potential challenges or limitations
+    - Expert predictions with sources]
+    
+    ## Key Takeaways
+    [NOW you can use bullets: 3-5 specific, actionable insights]
+    
+    ## Sources
+    [Numbered list of all sources with full URLs]
+    
+    Before completing, verify your report includes:
+    ✓ At least 5 concrete examples with company/project names
+    ✓ At least 5 quantitative data points
+    ✓ No paragraph shorter than 3 sentences in main sections
+    ✓ Every claim is sourced
+    ✓ Technical terms are explained
+    ✓ Logical narrative flow throughout
+    
+    After completing the report, send it via PushoverNotificationTool with a one-sentence
+    summary as the title and the complete report as the message.
+    
   agent: reporter
   context:
     - research_task
