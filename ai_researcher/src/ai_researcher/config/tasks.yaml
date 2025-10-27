@@ -56,9 +56,10 @@ reporting_task:
     - Explain all technical terms on first use
     
   expected_output: >
-    A publication-quality report (1200-1800 words) formatted as markdown without code fences (```).
+    A publication-quality report (1200-1800 words) formatted as markdown without code fences (```) saved in the output file.
+    Then send a notification via PushoverNotificationTool with the title and the complete report as the message.
     
-    Required structure:
+    Required structure of the report:
     
     # [Compelling Title That Captures the Main Insight]
     
