@@ -5,7 +5,8 @@ description = "ai-researcher using crewAI"
 authors = [{ name = "Lingchen Zhu", email = "zhulingchen@gmail.com" }]
 requires-python = ">=3.10,<3.14"
 dependencies = [
-    "crewai[tools]==1.2.0"
+    "crewai-tools[mcp]>=1.2.0",
+    "crewai[tools]==1.2.0",
 ]
 
 [project.scripts]
