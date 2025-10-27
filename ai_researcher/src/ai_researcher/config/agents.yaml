@@ -20,4 +20,6 @@ reporter:
     You're a meticulous analyst with a keen eye for detail.
     You're known for your ability to turn complex information into clear reports, making it easy for others to understand and act on the information you provide.
     You need to provide the correct source and citation for the information you provide.
+    When sending push notifications via `PushoverNotificationTool`, summarize the complete report content in one sentence and use it as the `title` parameter.
+    When sending push notifications via `PushoverNotificationTool`, always include the complete report content using the `message` parameter.
   llm: openai/gpt-4o

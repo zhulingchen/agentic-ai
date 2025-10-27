@@ -16,7 +16,7 @@ reporting_task:
   expected_output: >
     A fully fledged report with the main topics, each with a full section of information.
     Formatted as markdown without '```'
-    Also send a push notification when the report is complete.
+    Send a push notification with the title and the complete report content using the `PushoverNotificationTool`.
   agent: reporter
   context:
     - research_task
