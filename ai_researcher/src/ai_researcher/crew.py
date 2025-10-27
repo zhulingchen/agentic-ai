@@ -13,7 +13,7 @@ class AiResearcher():
     agents: List[BaseAgent]
     tasks: List[Task]
 
-    serper_tool = SerperDevTool()
+    serper_tool = SerperDevTool(n_results=20)
     pushover_notification_tool = PushoverNotificationTool()
 
     @agent
@@ -29,7 +29,15 @@ class AiResearcher():
         return Agent(
             config=self.agents_config['reporter'],
             verbose=True,
-            tools=[self.pushover_notification_tool],
+            tools=[],  # No tools for report creation - just writing
+        )
+
+    @agent
+    def notifier(self) -> Agent:
+        return Agent(
+            config=self.agents_config['reporter'],  # Same config as reporter
+            verbose=True,
+            tools=[self.pushover_notification_tool],  # Only has notification tool
         )
 
     @task
@@ -42,7 +50,13 @@ class AiResearcher():
     def reporting_task(self) -> Task:
         return Task(
             config=self.tasks_config['reporting_task'],
-            output_file='outputs/report.md'
+            output_file='outputs/report.md',
+        )
+
+    @task
+    def notification_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['notification_task'],
         )
 
     @crew

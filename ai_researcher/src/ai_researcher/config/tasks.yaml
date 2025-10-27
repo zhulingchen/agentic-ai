@@ -56,8 +56,7 @@ reporting_task:
     - Explain all technical terms on first use
     
   expected_output: >
-    A publication-quality report (1200-1800 words) formatted as markdown without code fences (```) saved in the output file.
-    Then send a notification via PushoverNotificationTool with the title and the complete report as the message.
+    Write and save a publication-quality report (1200-1800 words) formatted as markdown without code fences (```) to the output file.
     
     Required structure of the report:
     
@@ -111,10 +110,23 @@ reporting_task:
     ✓ Technical terms are explained
     ✓ Logical narrative flow throughout
     
-    After completing the report, send it via PushoverNotificationTool with a one-sentence
-    summary as the title and the complete report as the message.
-    
   agent: reporter
   context:
     - research_task
   output_file: outputs/report.md
+
+notification_task:
+  description: >
+    Send a push notification to inform the user that the research report has been completed.
+    Read the completed report from the output file and send it via PushoverNotificationTool.
+    
+  expected_output: >
+    Send a notification via PushoverNotificationTool with:
+    - title: A compelling one-sentence summary that captures the main finding
+    - message: The complete, formatted markdown report content
+    
+    The notification should inform the user that the report is ready and provide the full report content.
+    
+  agent: notifier
+  context:
+    - reporting_task
