@@ -1,21 +1,17 @@
 [project]
 name = "ai_researcher"
 version = "0.1.0"
-description = "ai-researcher using crewAI"
+description = "ai_researcher using CrewAI"
 authors = [{ name = "Lingchen Zhu", email = "zhulingchen@gmail.com" }]
 requires-python = ">=3.10,<3.14"
 dependencies = [
-    "crewai-tools[mcp]>=1.2.0",
     "crewai[tools]==1.2.0",
+    "crewai-tools[mcp]>=1.2.0",
 ]
 
 [project.scripts]
 ai_researcher = "ai_researcher.main:run"
 run_crew = "ai_researcher.main:run"
-train = "ai_researcher.main:train"
-replay = "ai_researcher.main:replay"
-test = "ai_researcher.main:test"
-run_with_trigger = "ai_researcher.main:run_with_trigger"
 
 [build-system]
 requires = ["hatchling"]
