@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import sys
 import warnings
 
 from datetime import datetime
@@ -15,8 +14,7 @@ def run():
     """
     inputs = {
         'topic': 'Large Language Models (LLM)',
-        'current_year': str(datetime.now().year),
-        'current_month': str(datetime.now().month),
+        'current_date': datetime.now().strftime("%B %d, %Y"),  # Use United States date format
     }
 
     try:
