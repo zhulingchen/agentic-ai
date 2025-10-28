@@ -3,7 +3,7 @@ import warnings
 
 from datetime import datetime
 
-from ai_researcher.crew import AiResearcher
+from deep_researcher.crew import AiResearcher
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 

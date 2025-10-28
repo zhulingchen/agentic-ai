@@ -1,7 +1,7 @@
 [project]
-name = "ai_researcher"
+name = "deep_researcher"
 version = "0.1.0"
-description = "ai_researcher using CrewAI"
+description = "deep_researcher using CrewAI"
 authors = [{ name = "Lingchen Zhu", email = "zhulingchen@gmail.com" }]
 requires-python = ">=3.10,<3.14"
 dependencies = [
@@ -10,8 +10,8 @@ dependencies = [
 ]
 
 [project.scripts]
-ai_researcher = "ai_researcher.main:run"
-run_crew = "ai_researcher.main:run"
+deep_researcher = "deep_researcher.main:run"
+run_crew = "deep_researcher.main:run"
 
 [build-system]
 requires = ["hatchling"]
