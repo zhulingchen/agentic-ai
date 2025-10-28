@@ -1,6 +1,6 @@
-# AiResearcher Crew
+# Deep Researcher Crew
 
-Welcome to the AiResearcher Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+Welcome to the Deep Researcher Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
 
 ## Installation
 
@@ -45,7 +45,7 @@ The deep-researcher Crew is composed of multiple AI agents, each with unique rol
 
 ## Support
 
-For support, questions, or feedback regarding the AiResearcher Crew or crewAI.
+For support, questions, or feedback regarding the Deep Researcher Crew or crewAI.
 - Visit our [documentation](https://docs.crewai.com)
 - Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
 - [Join our Discord](https://discord.com/invite/X4JWnZnxPb)

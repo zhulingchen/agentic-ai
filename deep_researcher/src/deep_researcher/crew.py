@@ -7,8 +7,8 @@ from typing import List
 from deep_researcher.tools.pushover_tool import PushoverNotificationTool
 
 @CrewBase
-class AiResearcher():
-    """AiResearcher crew"""
+class DeepResearcher():
+    """DeepResearcher crew"""
 
     agents: List[BaseAgent]
     tasks: List[Task]
@@ -62,7 +62,7 @@ class AiResearcher():
 
     @crew
     def crew(self) -> Crew:
-        """Creates the AiResearcher crew"""
+        """Creates the DeepResearcher crew"""
 
         return Crew(
             agents=self.agents, # Automatically created by the @agent decorator

@@ -5,7 +5,7 @@ import os
 import warnings
 from typing import Optional
 
-from deep_researcher.crew import AiResearcher
+from deep_researcher.crew import DeepResearcher
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
@@ -24,7 +24,7 @@ def run(args: Optional[argparse.Namespace] = None):
     }
 
     try:
-        AiResearcher().crew().kickoff(inputs=inputs)
+        DeepResearcher().crew().kickoff(inputs=inputs)
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 
