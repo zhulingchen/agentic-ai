@@ -2,7 +2,13 @@ research_task:
   description: >
     Conduct comprehensive research on {topic}, focusing on one specific subtopic that represents
     the most significant recent development or emerging trend.
-    
+
+    Search strategies:
+    - First search: Broad overview of the topic
+    - Second search: Specific technical implementation details or case studies
+    - Third search: Research papers, academic articles, or hands-on guides/tutorials
+    - Fourth search (if needed): Related projects or tools
+
     Your research must:
     - Identify the most impactful recent advancement (within the last 3-6 months)
     - Analyze technical implementations with concrete examples
