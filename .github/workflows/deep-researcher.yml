@@ -25,14 +25,13 @@ jobs:
       
       - name: Install UV
         run: |
-          pip install uv
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
       
-      - name: Install dependencies
+      - name: Sync dependencies
         run: |
           cd deep_researcher
-          uv venv
-          source .venv/bin/activate
-          uv pip install -e .
+          uv sync
       
       - name: Run Deep Researcher
         env:
@@ -40,11 +39,11 @@ jobs:
           PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
           PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
           SERPER_API_KEY: ${{ secrets.SERPER_API_KEY }}
+          CREW_TOPIC: ${{ inputs.topic }}
         run: |
           cd deep_researcher
           mkdir -p outputs
-          source .venv/bin/activate
-          deep_researcher --topic "${{ inputs.topic }}"
+          uv run crewai run
       
       - name: Upload research report
         if: always()
