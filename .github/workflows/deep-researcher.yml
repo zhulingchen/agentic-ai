@@ -1,0 +1,53 @@
+name: Deep Researcher
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'Research topic'
+        required: true
+        type: string
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Install UV
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+      
+      - name: Sync dependencies
+        run: |
+          cd deep_researcher
+          uv sync
+      
+      - name: Run Deep Researcher
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
+          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          SERPER_API_KEY: ${{ secrets.SERPER_API_KEY }}
+          CREW_TOPIC: ${{ inputs.topic }}
+        run: |
+          cd deep_researcher
+          uv run crewai run
+      
+      - name: Upload research report
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-report-${{ github.run_id }}-${{ inputs.topic }}
+          path: deep_researcher/outputs/report.md
+          retention-days: 30
