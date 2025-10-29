@@ -1,0 +1,49 @@
+name: Deep Researcher - Research Topic
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'Research topic to investigate'
+        required: true
+        type: string
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Install UV
+        run: |
+          pip install uv
+      
+      - name: Install dependencies
+        run: |
+          cd deep_researcher
+          uv pip install --system -e .
+      
+      - name: Run Deep Researcher
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
+          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          SERPER_API_KEY: ${{ secrets.SERPER_API_KEY }}
+        run: |
+          cd deep_researcher
+          python -m deep_researcher.main --topic "${{ inputs.topic }}"
+      
+      - name: Upload research report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-report
+          path: deep_researcher/outputs/report.md
+          retention-days: 30
