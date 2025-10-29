@@ -42,7 +42,6 @@ jobs:
           CREW_TOPIC: ${{ inputs.topic }}
         run: |
           cd deep_researcher
-          mkdir -p outputs
           uv run crewai run
       
       - name: Upload research report
