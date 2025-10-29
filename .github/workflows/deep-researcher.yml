@@ -1,10 +1,10 @@
-name: Deep Researcher - Research Topic
+name: Deep Researcher
 
 on:
   workflow_dispatch:
     inputs:
       topic:
-        description: 'Research topic to investigate'
+        description: 'Research topic'
         required: true
         type: string
 
