@@ -32,7 +32,7 @@ To add secrets:
 ### Running the Research Pipeline
 
 1. Go to the **Actions** tab in your GitHub repository
-2. Select **Deep Researcher - Research Topic** from the workflow list
+2. Select **Deep Researcher** from the workflow list
 3. Click **Run workflow**
 4. Enter your research topic in the input field
 5. Click **Run workflow** to start
