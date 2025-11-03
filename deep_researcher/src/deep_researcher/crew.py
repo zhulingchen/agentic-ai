@@ -22,7 +22,7 @@ class DeepResearcher():
             config=self.agents_config['researcher'],
             verbose=True,
             tools=[self.serper_tool],
-            max_iterations=5,
+            max_iterations=4,
         )
 
     @agent
