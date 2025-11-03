@@ -41,15 +41,20 @@ The workflow will:
 - Set up the Python environment
 - Install all dependencies
 - Run the Deep Researcher crew with your specified topic
-- Send a push notification to your device with the research results
-- Upload the research report as an artifact (available for 30 days)
+- Generate research reports in both English and Chinese
+- Send push notifications to your device with both reports
+- Upload the research reports as artifacts (available for 30 days)
 
 ### Viewing Results
 
 You can access the research results in two ways:
 
-1. **Push Notification**: You'll receive a push notification on your device with the complete research report
-2. **GitHub Artifacts**: Download the research report from the workflow run's artifacts section
+1. **Push Notifications**: You'll receive two push notifications on your device:
+   - English version: Complete research report in English
+   - Chinese version: Complete research report translated to Chinese
+2. **GitHub Artifacts**: Download both research reports from the workflow run's artifacts section:
+   - `report_en.md`: English research report
+   - `report_zh.md`: Chinese research report
 
 ## Local Development
 

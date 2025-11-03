@@ -34,11 +34,19 @@ class DeepResearcher():
         )
 
     @agent
+    def translator(self) -> Agent:
+        return Agent(
+            config=self.agents_config['translator'],
+            verbose=True,
+            tools=[],  # No tools for translation - just writing
+        )
+
+    @agent
     def notifier(self) -> Agent:
         return Agent(
-            config=self.agents_config['reporter'],  # Same config as reporter
+            config=self.agents_config['notifier'],
             verbose=True,
-            tools=[self.pushover_notification_tool],  # Only has notification tool
+            tools=[self.pushover_notification_tool],
         )
 
     @task
@@ -51,7 +59,14 @@ class DeepResearcher():
     def reporting_task(self) -> Task:
         return Task(
             config=self.tasks_config['reporting_task'],
-            output_file='outputs/report.md',
+            output_file='outputs/report_en.md',
+        )
+
+    @task
+    def translation_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['translation_task'],
+            output_file='outputs/report_zh.md',
         )
 
     @task
