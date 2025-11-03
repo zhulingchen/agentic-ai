@@ -3,11 +3,14 @@ research_task:
     Conduct comprehensive research on {topic}, focusing on one specific subtopic that represents
     the most significant recent development or emerging trend.
 
-    Search strategies:
-    - First search: Broad overview of the topic
+    CRITICAL: You must limit your searches to EXACTLY 3-4 internet searches total. Plan your
+    searches carefully to maximize information gathering efficiency.
+
+    Search strategies (use ONLY these 3-4 searches):
+    - First search: Broad overview of the topic to identify the most significant development
     - Second search: Specific technical implementation details or case studies
     - Third search: Research papers, academic articles, or hands-on guides/tutorials
-    - Fourth search (if needed): Related projects or tools
+    - Fourth search (ONLY if absolutely necessary): Related projects or tools
 
     Your research must:
     - Identify the most impactful recent advancement (within the last 3-6 months)
