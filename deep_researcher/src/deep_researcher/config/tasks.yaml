@@ -10,7 +10,7 @@ research_task:
     - First search: Broad overview of the topic to identify the most significant development
     - Second search: Specific technical implementation details or case studies
     - Third search: Research papers, academic articles, or hands-on guides/tutorials
-    - Fourth search (ONLY if absolutely necessary): Related projects or tools
+    - Fourth search (only if first three searches lack sufficient GitHub repositories or quantitative data): Related projects or tools
 
     Your research must:
     - Identify the most impactful recent advancement (within the last 3-6 months)
