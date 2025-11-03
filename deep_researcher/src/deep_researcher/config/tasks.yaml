@@ -148,7 +148,7 @@ translation_task:
     - Keep all URLs and source citations
     - Maintain markdown formatting throughout
     
-  agent: translator
+  agent: reporter
   context:
     - reporting_task
   output_file: outputs/report_zh.md
