@@ -44,7 +44,7 @@ class DeepResearcher():
     @agent
     def notifier(self) -> Agent:
         return Agent(
-            config=self.agents_config['reporter'],  # Same config as reporter
+            config=self.agents_config['notifier'],
             verbose=True,
             tools=[self.pushover_notification_tool],  # Only has notification tool
         )
