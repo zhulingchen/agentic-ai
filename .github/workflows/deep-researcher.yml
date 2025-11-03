@@ -44,10 +44,12 @@ jobs:
           cd deep_researcher
           uv run crewai run
       
-      - name: Upload research report
+      - name: Upload research reports
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: research-report-${{ github.run_id }}-${{ inputs.topic }}
-          path: deep_researcher/outputs/report.md
+          name: research-reports-${{ github.run_id }}-${{ inputs.topic }}
+          path: |
+            deep_researcher/outputs/report.md
+            deep_researcher/outputs/report_zh.md
           retention-days: 30
