@@ -129,14 +129,22 @@ translation_task:
   description: >
     Translate the completed English research report into Chinese. Read the English report
     from the output file and create a Chinese version that maintains all technical accuracy,
-    formatting, and structure.
+    formatting, and structure. You must maintain complete fidelity to the source content.
+    
+    CRITICAL REQUIREMENTS:
+    - Do NOT add any information that is not in the English report
+    - Do NOT remove or omit any information from the English report
+    - Do NOT hallucinate or make up any content
+    - Do NOT translate source citations - keep them EXACTLY as they appear in English
+    - Do NOT translate URLs, author names, publication names, or reference titles
     
     Your translation must:
     - Preserve all markdown formatting (headers, links, lists)
-    - Keep all URLs and source citations intact
+    - Keep all URLs and source citations UNCHANGED in English
     - Maintain technical accuracy for all terms and metrics
-    - Use natural, fluent Chinese prose
+    - Use natural, fluent Chinese prose for narrative content only
     - Keep the same document structure as the English version
+    - Translate only the narrative text, not citations or references
     
   expected_output: >
     A Chinese translation of the research report saved to the output file. The Chinese report
@@ -145,8 +153,10 @@ translation_task:
     - Translate the title and all headers into Chinese
     - Translate all narrative text into natural Chinese
     - Preserve all technical terms, metrics, and data points
-    - Keep all URLs and source citations
+    - Keep all URLs and source citations UNCHANGED in their original English form
+    - Keep the "Sources" section with all citations in English exactly as they appear
     - Maintain markdown formatting throughout
+    - Ensure complete information parity with the English version (no additions or deletions)
     
   agent: translator
   context:
