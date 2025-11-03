@@ -36,7 +36,7 @@ class DeepResearcher():
     @agent
     def translator(self) -> Agent:
         return Agent(
-            config=self.agents_config['reporter'],  # Reuse reporter config
+            config=self.agents_config['translator'],
             verbose=True,
             tools=[],  # No tools for translation - just writing
         )
