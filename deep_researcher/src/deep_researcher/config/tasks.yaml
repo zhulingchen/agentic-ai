@@ -127,8 +127,8 @@ reporting_task:
 
 translation_task:
   description: >
-    Translate the completed English research report into Chinese. Read the English report
-    from the output file and create a Chinese version that maintains all technical accuracy,
+    Translate the completed English research report into Chinese. Use the English report provided
+    via the reporting_task context dependency and create a Chinese version that maintains all technical accuracy,
     formatting, and structure. You must maintain complete fidelity to the source content.
     
     CRITICAL REQUIREMENTS:
