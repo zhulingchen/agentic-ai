@@ -125,18 +125,54 @@ reporting_task:
     - research_task
   output_file: outputs/report.md
 
-notification_task:
+translation_task:
   description: >
-    Send a push notification to inform the user that the research report has been completed.
-    Read the completed report from the output file and send it via PushoverNotificationTool.
+    Translate the completed English research report into Chinese. Read the English report
+    from the output file and create a Chinese version that maintains all technical accuracy,
+    formatting, and structure.
+    
+    Your translation must:
+    - Preserve all markdown formatting (headers, links, lists)
+    - Keep all URLs and source citations intact
+    - Maintain technical accuracy for all terms and metrics
+    - Use natural, fluent Chinese prose
+    - Keep the same document structure as the English version
     
   expected_output: >
-    Send a notification via PushoverNotificationTool with:
-    - title: A compelling one-sentence summary that captures the main finding
-    - message: The complete, formatted markdown report content
+    A Chinese translation of the research report saved to the output file. The Chinese report
+    should maintain the same structure and formatting as the English report:
     
-    The notification should inform the user that the report is ready and provide the full report content.
+    - Translate the title and all headers into Chinese
+    - Translate all narrative text into natural Chinese
+    - Preserve all technical terms, metrics, and data points
+    - Keep all URLs and source citations
+    - Maintain markdown formatting throughout
+    
+  agent: translator
+  context:
+    - reporting_task
+  output_file: outputs/report_zh.md
+
+notification_task:
+  description: >
+    Send push notifications to inform the user that both English and Chinese research
+    reports have been completed. Read both the English and Chinese reports from their
+    output files and send them via PushoverNotificationTool.
+    
+  expected_output: >
+    Send two notifications via PushoverNotificationTool:
+    
+    1. English Report:
+       - title: A compelling one-sentence summary that captures the main finding
+       - message: The complete, formatted markdown report content from report.md
+    
+    2. Chinese Report:
+       - title: The same compelling summary translated to Chinese
+       - message: The complete, formatted markdown report content from report_zh.md
+    
+    Both notifications should inform the user that the reports are ready and provide the full content.
     
   agent: notifier
   context:
     - reporting_task
+    - translation_task
