@@ -53,7 +53,7 @@ You can access the research results in two ways:
    - English version: Complete research report in English
    - Chinese version: Complete research report translated to Chinese
 2. **GitHub Artifacts**: Download both research reports from the workflow run's artifacts section:
-   - `report.md`: English research report
+   - `report_en.md`: English research report
    - `report_zh.md`: Chinese research report
 
 ## Local Development

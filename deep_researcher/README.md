@@ -38,7 +38,7 @@ $ crewai run
 This command initializes the deep-researcher Crew, assembling the agents and assigning them tasks as defined in your configuration.
 
 This example will create two research reports:
-- `outputs/report.md` - English research report
+- `outputs/report_en.md` - English research report
 - `outputs/report_zh.md` - Chinese translation of the research report
 
 Both reports will be sent to your device via Pushover notifications.

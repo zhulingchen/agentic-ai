@@ -50,6 +50,6 @@ jobs:
         with:
           name: research-reports-${{ github.run_id }}-${{ inputs.topic }}
           path: |
-            deep_researcher/outputs/report.md
+            deep_researcher/outputs/report_en.md
             deep_researcher/outputs/report_zh.md
           retention-days: 30

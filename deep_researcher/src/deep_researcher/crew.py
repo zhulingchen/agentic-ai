@@ -59,7 +59,7 @@ class DeepResearcher():
     def reporting_task(self) -> Task:
         return Task(
             config=self.tasks_config['reporting_task'],
-            output_file='outputs/report.md',
+            output_file='outputs/report_en.md',
         )
 
     @task

@@ -123,7 +123,7 @@ reporting_task:
   agent: reporter
   context:
     - research_task
-  output_file: outputs/report.md
+  output_file: outputs/report_en.md
 
 translation_task:
   description: >
@@ -164,7 +164,7 @@ notification_task:
     
     1. English Report:
        - title: A compelling one-sentence summary that captures the main finding
-       - message: The complete, formatted markdown report content from report.md
+       - message: The complete, formatted markdown report content from report_en.md
     
     2. Chinese Report:
        - title: The same compelling summary translated to Chinese
