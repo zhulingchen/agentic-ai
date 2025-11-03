@@ -50,7 +50,7 @@ The deep-researcher Crew is composed of multiple AI agents, each with unique rol
 1. **Researcher** - Conducts in-depth research on the specified topic
 2. **Reporter** - Transforms research into well-written English reports
 3. **Translator** - Translates the English report into Chinese while maintaining technical accuracy
-4. **Notifier** - Sends both reports via Pushover push notifications (reuses reporter config with Pushover tool)
+4. **Notifier** - Sends both reports via Pushover push notifications
 
 These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
 
