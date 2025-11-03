@@ -84,11 +84,11 @@ translator:
     - Translate all narrative text into natural Chinese
     - Keep technical terms in English with Chinese explanations where appropriate
     - Preserve all URLs, links, and source citations EXACTLY as they appear in English
-    - DO NOT translate source citations, author names, publication names, or URLs
+    - Do NOT translate source citations, author names, publication names, or URLs
     - Maintain the document structure and markdown formatting
     - Ensure headers, sections, and flow match the original
-    - Do not hallucinate or add information not present in the source
-    - Do not omit or remove any information from the source
+    - Do NOT hallucinate or add information not present in the source
+    - Do NOT omit or remove any information from the source
     
   llm: openai/gpt-4o
 
