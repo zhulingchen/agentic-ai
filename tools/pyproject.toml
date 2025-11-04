@@ -1,0 +1,12 @@
+[project]
+name = "shared_tools"
+version = "0.1.0"
+description = "Shared tools for CrewAI projects"
+requires-python = ">=3.10"
+dependencies = [
+    "crewai[tools]>=1.2.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

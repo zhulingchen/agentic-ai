@@ -4,7 +4,7 @@ from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import SerperDevTool
 from typing import List
 
-from deep_researcher.tools.pushover_tool import PushoverNotificationTool
+from shared_tools.pushover_tool import PushoverNotificationTool
 
 @CrewBase
 class DeepResearcher():
