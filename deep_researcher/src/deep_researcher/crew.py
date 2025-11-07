@@ -5,6 +5,8 @@ from crewai_tools import SerperDevTool
 from typing import List
 
 from shared_tools.pushover_tool import PushoverNotificationTool
+from shared_tools.tursodb_tool import TursoDatabaseTool
+
 
 @CrewBase
 class DeepResearcher():
@@ -15,6 +17,7 @@ class DeepResearcher():
 
     serper_tool = SerperDevTool(n_results=10)
     pushover_notification_tool = PushoverNotificationTool()
+    turso_database_tool = TursoDatabaseTool()
 
     @agent
     def researcher(self) -> Agent:
@@ -39,6 +42,14 @@ class DeepResearcher():
             config=self.agents_config['translator'],
             verbose=True,
             tools=[],  # No tools for translation - just writing
+        )
+
+    @agent
+    def recorder(self) -> Agent:
+        return Agent(
+            config=self.agents_config['recorder'],
+            verbose=True,
+            tools=[self.turso_database_tool],
         )
 
     @agent
@@ -67,6 +78,12 @@ class DeepResearcher():
         return Task(
             config=self.tasks_config['translation_task'],
             output_file='outputs/report_zh.md',
+        )
+
+    @task
+    def recording_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['recording_task'],
         )
 
     @task

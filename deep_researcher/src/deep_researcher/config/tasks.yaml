@@ -163,6 +163,28 @@ translation_task:
     - reporting_task
   output_file: outputs/report_zh.md
 
+recording_task:
+  description: >
+    Save the completed research record to the Turso database. Receive the research topic
+    and both the English and Chinese report contents from the context of reporting_task
+    and translation_task. Use the TursoDatabaseTool to persist the research record.
+    
+    The tool will automatically determine whether the research was run manually or via CI/CD
+    based on the environment.
+    
+  expected_output: >
+    Successfully save the research record to Turso database using TursoDatabaseTool with:
+    - topic: The research topic that was investigated
+    - report_en: The complete English research report content
+    - report_zh: The complete Chinese research report content
+    
+    Confirm successful saving with the returned status and record ID.
+    
+  agent: recorder
+  context:
+    - reporting_task
+    - translation_task
+
 notification_task:
   description: >
     Send push notifications to inform the user that both English and Chinese research
