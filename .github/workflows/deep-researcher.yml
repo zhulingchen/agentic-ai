@@ -39,7 +39,10 @@ jobs:
           PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
           PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
           SERPER_API_KEY: ${{ secrets.SERPER_API_KEY }}
+          TURSO_DATABASE_URL: ${{ secrets.TURSO_DATABASE_URL }}
+          TURSO_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
           CREW_TOPIC: ${{ inputs.topic }}
+          CREWAI_TRACING_ENABLED: true
         run: |
           cd deep_researcher
           uv run crewai run
