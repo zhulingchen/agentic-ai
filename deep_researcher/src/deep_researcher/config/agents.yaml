@@ -27,7 +27,7 @@ researcher:
     
   llm: openai/gpt-5
 
-reporter:
+writer:
   role: >
     Technical Content Writer & Research Communicator
   goal: >

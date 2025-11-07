@@ -44,7 +44,7 @@ research_task:
     
   agent: researcher
 
-reporting_task:
+writing_task:
   description: >
     Transform the research into an engaging, educational report that balances technical depth
     with readability. Write in prose paragraphs with narrative flow - NO bullet points except
@@ -120,7 +120,7 @@ reporting_task:
     ✓ Technical terms are explained
     ✓ Logical narrative flow throughout
     
-  agent: reporter
+  agent: writer
   context:
     - research_task
   output_file: outputs/report_en.md
@@ -128,7 +128,7 @@ reporting_task:
 translation_task:
   description: >
     Translate the completed English research report into Chinese. Use the English report provided
-    via the reporting_task context dependency and create a Chinese version that maintains all technical accuracy,
+    via the writing_task context dependency and create a Chinese version that maintains all technical accuracy,
     formatting, and structure. You must maintain complete fidelity to the source content.
     
     CRITICAL REQUIREMENTS:
@@ -160,13 +160,13 @@ translation_task:
     
   agent: translator
   context:
-    - reporting_task
+    - writing_task
   output_file: outputs/report_zh.md
 
 recording_task:
   description: >
     Save the completed research record to the Turso database. Receive the research topic
-    and both the English and Chinese report contents from the context of reporting_task
+    and both the English and Chinese report contents from the context of writing_task
     and translation_task. Use the TursoDatabaseTool to persist the research record.
     
   expected_output: >
@@ -179,14 +179,14 @@ recording_task:
     
   agent: recorder
   context:
-    - reporting_task
+    - writing_task
     - translation_task
 
 notification_task:
   description: >
     Send push notifications to inform the user that both English and Chinese research
     reports have been completed. Receive both the English and Chinese report contents from the
-    context of reporting_task and translation_task, and send them via PushoverNotificationTool.
+    context of writing_task and translation_task, and send them via PushoverNotificationTool.
     
   expected_output: >
     Send two notifications via PushoverNotificationTool:
@@ -203,5 +203,5 @@ notification_task:
     
   agent: notifier
   context:
-    - reporting_task
+    - writing_task
     - translation_task

@@ -48,7 +48,7 @@ Both reports will be sent to your device via Pushover notifications.
 The deep-researcher Crew is composed of multiple AI agents, each with unique roles, goals, and tools:
 
 1. **Researcher** - Conducts in-depth research on the specified topic
-2. **Reporter** - Transforms research into well-written English reports
+2. **Writer** - Transforms research into well-written English reports
 3. **Translator** - Translates the English report into Chinese while maintaining technical accuracy
 4. **Notifier** - Sends both reports via Pushover push notifications
 

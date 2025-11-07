@@ -29,9 +29,9 @@ class DeepResearcher():
         )
 
     @agent
-    def reporter(self) -> Agent:
+    def writer(self) -> Agent:
         return Agent(
-            config=self.agents_config['reporter'],
+            config=self.agents_config['writer'],
             verbose=True,
             tools=[],  # No tools for report creation - just writing
         )
@@ -67,9 +67,9 @@ class DeepResearcher():
         )
 
     @task
-    def reporting_task(self) -> Task:
+    def writing_task(self) -> Task:
         return Task(
-            config=self.tasks_config['reporting_task'],
+            config=self.tasks_config['writing_task'],
             output_file='outputs/report_en.md',
         )
 
