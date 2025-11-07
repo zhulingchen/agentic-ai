@@ -6,7 +6,7 @@ This repository contains AI agent projects powered by CrewAI.
 
 ### Deep Researcher
 
-A multi-agent AI system that conducts deep research on any topic and sends push notifications with the results.
+A multi-agent AI system that conducts deep research on any topic, saves research records to a Turso Cloud SQLite database, and sends push notifications with the results.
 
 See [deep_researcher/README.md](deep_researcher/README.md) for more details.
 
@@ -22,6 +22,8 @@ Before using the workflow, you need to configure the following secrets in your G
 2. **PUSHOVER_USER** - Your Pushover user key for push notifications
 3. **PUSHOVER_TOKEN** - Your Pushover application token
 4. **SERPER_API_KEY** - Your Serper API key for web searches
+5. **TURSO_DATABASE_URL** - Your Turso Cloud database URL
+6. **TURSO_AUTH_TOKEN** - Your Turso Cloud authentication token
 
 To add secrets:
 1. Go to your repository on GitHub
@@ -42,6 +44,7 @@ The workflow will:
 - Install all dependencies
 - Run the Deep Researcher crew with your specified topic
 - Generate research reports in both English and Chinese
+- Save research records to the Turso Cloud database
 - Send push notifications to your device with both reports
 - Upload the research reports as artifacts (available for 30 days)
 
