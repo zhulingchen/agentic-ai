@@ -211,3 +211,6 @@ __marimo__/
 *.db-info
 *.db-shm
 *.db-wal
+
+# Outputs
+outputs/
