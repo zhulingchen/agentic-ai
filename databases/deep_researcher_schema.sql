@@ -3,5 +3,5 @@ CREATE TABLE IF NOT EXISTS research_records (
     topic TEXT NOT NULL,
     report_en TEXT NOT NULL,
     report_zh TEXT NOT NULL,
-    created_at TEXT NOT NULL DEFAULT (datetime('now'))
+    created_timestamp TEXT NOT NULL DEFAULT (datetime('now'))
 );

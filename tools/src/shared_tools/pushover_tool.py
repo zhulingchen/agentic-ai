@@ -1,4 +1,5 @@
 from crewai.tools import BaseTool
+import json
 import os
 from pydantic import BaseModel, Field
 import requests
@@ -50,7 +51,11 @@ class PushoverNotificationTool(BaseTool):
             except requests.exceptions.RequestException as e:
                 results.append(f"Part {i+1}: Error - {str(e)}")
         
-        return f'{{"notification": "sent", "results": {results}}}'
+        payload = {
+            "notification": "sent",
+            "results": results,
+        }
+        return json.dumps(payload)
     
     def _split_message(self, message: str, max_length: int) -> list:
         """Split a long message into chunks that fit within the character limit."""

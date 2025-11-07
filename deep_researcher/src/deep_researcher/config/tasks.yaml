@@ -169,9 +169,6 @@ recording_task:
     and both the English and Chinese report contents from the context of reporting_task
     and translation_task. Use the TursoDatabaseTool to persist the research record.
     
-    The tool will automatically determine whether the research was run manually or via CI/CD
-    based on the environment.
-    
   expected_output: >
     Successfully save the research record to Turso database using TursoDatabaseTool with:
     - topic: The research topic that was investigated

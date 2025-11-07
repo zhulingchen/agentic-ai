@@ -1,9 +1,9 @@
 from crewai.tools import BaseTool
+import json
 import libsql
 import os
 from pydantic import BaseModel, Field
 from typing import Type
-from datetime import datetime
 
 
 class TursoDatabaseInput(BaseModel):
@@ -39,20 +39,30 @@ class TursoDatabaseTool(BaseTool):
     def _run(self, topic: str, report_en: str, report_zh: str) -> str:
         conn = self._get_connection()
         try:
-            # Execute the insert
-            conn.execute(
-                """
-                INSERT INTO research_records (topic, report_en, report_zh, created_at)
-                VALUES (?, ?, ?, ?)
-                """,
-                [topic, report_en, report_zh, datetime.now().isoformat()]
-            )
-            conn.commit()
-            # Get the inserted ID
-            id_result = conn.execute("SELECT last_insert_rowid() as id")
-            record_id = id_result.rows[0]["id"] if id_result.rows else None
+            with conn:
+                cur = conn.execute(
+                    """
+                    INSERT INTO research_records (topic, report_en, report_zh)
+                    VALUES (?, ?, ?)
+                    RETURNING id, created_timestamp
+                    """,
+                    [topic, report_en, report_zh],
+                )
+                row = cur.fetchone()
+                record_id, created_timestamp = row if row else (None, None)
+
+            payload = {
+                "status": "saved",
+                "id": record_id,
+                "topic": topic,
+                "created_timestamp": created_timestamp,
+            }
+            return json.dumps(payload)
         except Exception as e:
-            return f'{{"status": "error", "message": "{str(e)}"}}'
+            payload = {
+                "status": "error",
+                "message": str(e),
+            }
+            return json.dumps(payload)
         finally:
             conn.close()
-        return f'{{"status": "saved", "id": {record_id}, "topic": "{topic}"}}'
