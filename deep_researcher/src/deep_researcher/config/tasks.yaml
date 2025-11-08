@@ -165,20 +165,27 @@ translation_task:
 
 recording_task:
   description: >
-    Save the completed research record to the Turso database. Receive the research topic
-    and both the English and Chinese report contents from the context of writing_task
-    and translation_task. Use the TursoResearchRecordTool to persist the research record.
+    Save the completed research record and its sources to the Turso database. 
+    Extract the research topic from the task context, and both the English and 
+    Chinese report contents from writing_task and translation_task.
+    
+    You must perform two operations in sequence:
+    1. First, use TursoResearchRecordTool to save the research record. 
+       This will return a research_id that you need for the next step.
+    
+    2. Then, use TursoResearchSourcesTool to save all the research sources 
+       that were consulted during research. Extract the source URLs and titles 
+       from the research_task output, and link them to the research record 
+       using the research_id from step 1.
     
   expected_output: >
-    Successfully save the research record to Turso database using TursoResearchRecordTool with:
-    - topic: The research topic that was investigated
-    - report_en: The complete English research report content
-    - report_zh: The complete Chinese research report content
-    
-    Confirm successful saving with the returned status and record ID.
+    Successfully save both the research record and its sources to Turso database.
+    Confirm successful saving of the research record with its returned research_id,
+    and confirm successful saving of all research sources linked to that record.
     
   agent: recorder
   context:
+    - research_task
     - writing_task
     - translation_task
 
