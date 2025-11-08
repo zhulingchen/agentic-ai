@@ -5,9 +5,11 @@ import os
 from pydantic import BaseModel, Field
 from typing import Optional, Type
 
+from shared_tools.turso_base_tool import TursoBaseTool
 
-class TursoDatabaseInput(BaseModel):
-    """Input schema for TursoDatabaseTool."""
+
+class TursoResearchRecordInput(BaseModel):
+    """Input schema for TursoResearchRecordTool."""
     topic: str = Field(..., description="The research topic")
     report_en: str = Field(..., description="The English research report content")
     report_zh: str = Field(..., description="The Chinese research report content")
@@ -15,28 +17,13 @@ class TursoDatabaseInput(BaseModel):
     word_count_zh: Optional[int] = Field(None, description="Word count of Chinese report")
 
 
-class TursoDatabaseTool(BaseTool):
+class TursoResearchRecordTool(TursoBaseTool):
     name: str = "Save research record to Turso database"
     description: str = (
         "This tool saves a deep research record to the Turso Cloud SQLite database. "
         "Use this to store research history with the topic, English report, and Chinese report. "
     )
-    args_schema: Type[BaseModel] = TursoDatabaseInput
-
-    def _get_connection(self):
-        database_url = os.getenv("TURSO_DATABASE_URL")
-        auth_token = os.getenv("TURSO_AUTH_TOKEN")
-        
-        if not database_url or not auth_token:
-            raise ValueError(
-                "TURSO_DATABASE_URL and TURSO_AUTH_TOKEN must be set in environment variables"
-            )
-        
-        conn = libsql.connect(
-            database=database_url,
-            auth_token=auth_token,
-        )
-        return conn
+    args_schema: Type[BaseModel] = TursoResearchRecordInput
 
     def _run(
         self,

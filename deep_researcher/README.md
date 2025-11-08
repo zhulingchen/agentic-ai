@@ -67,7 +67,7 @@ These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, l
 
 ## Database Storage
 
-The Deep Researcher system includes a **TursoDatabaseTool** that automatically saves all completed research records to a Turso Cloud SQLite database. Each research record includes:
+The Deep Researcher system includes a **TursoResearchRecordTool** that automatically saves all completed research records to a Turso Cloud SQLite database. Each research record includes:
 
 - Research topic
 - Complete English research report

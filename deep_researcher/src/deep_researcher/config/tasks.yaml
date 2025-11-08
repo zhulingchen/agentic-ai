@@ -167,10 +167,10 @@ recording_task:
   description: >
     Save the completed research record to the Turso database. Receive the research topic
     and both the English and Chinese report contents from the context of writing_task
-    and translation_task. Use the TursoDatabaseTool to persist the research record.
+    and translation_task. Use the TursoResearchRecordTool to persist the research record.
     
   expected_output: >
-    Successfully save the research record to Turso database using TursoDatabaseTool with:
+    Successfully save the research record to Turso database using TursoResearchRecordTool with:
     - topic: The research topic that was investigated
     - report_en: The complete English research report content
     - report_zh: The complete Chinese research report content

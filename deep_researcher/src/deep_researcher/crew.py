@@ -5,7 +5,7 @@ from crewai_tools import SerperDevTool
 from typing import List
 
 from shared_tools.pushover_tool import PushoverNotificationTool
-from shared_tools.tursodb_tool import TursoDatabaseTool
+from shared_tools.turso_research_record_tool import TursoResearchRecordTool
 
 
 @CrewBase
@@ -17,7 +17,7 @@ class DeepResearcher():
 
     serper_tool = SerperDevTool(n_results=10)
     pushover_notification_tool = PushoverNotificationTool()
-    turso_database_tool = TursoDatabaseTool()
+    turso_research_record_tool = TursoResearchRecordTool()
 
     @agent
     def researcher(self) -> Agent:
@@ -49,7 +49,7 @@ class DeepResearcher():
         return Agent(
             config=self.agents_config['recorder'],
             verbose=True,
-            tools=[self.turso_database_tool],
+            tools=[self.turso_research_record_tool],
         )
 
     @agent
