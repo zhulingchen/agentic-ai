@@ -56,7 +56,7 @@ class TursoResearchRecordTool(TursoBaseTool):
 
             payload = {
                 "status": "saved",
-                "id": record_id,
+                "record_id": record_id,
                 "topic": topic,
                 "word_count_en": word_count_en,
                 "word_count_zh": word_count_zh,
