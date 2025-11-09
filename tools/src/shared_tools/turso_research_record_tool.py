@@ -1,7 +1,4 @@
-from crewai.tools import BaseTool
 import json
-import libsql
-import os
 from pydantic import BaseModel, Field
 from typing import Optional, Type
 
