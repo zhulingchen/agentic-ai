@@ -71,15 +71,15 @@ class TursoResearchSourcesTool(TursoBaseTool):
                         """
                         INSERT INTO research_sources (research_id, url, title, domain)
                         VALUES (?, ?, ?, ?)
-                        RETURNING id, research_id
+                        RETURNING id
                         """,
                         [research_id, source.url, source.title, domain],
                     )
                     row = cur.fetchone()
-                    id, research_id = row if row else (None, None)
+                    source_id = row[0] if row else None
                     
                     saved_sources.append({
-                        "id": id,
+                        "id": source_id,
                         "research_id": research_id,
                         "url": source.url,
                         "title": source.title,
