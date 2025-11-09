@@ -5,6 +5,9 @@ from crewai_tools import SerperDevTool
 from typing import List
 
 from shared_tools.pushover_tool import PushoverNotificationTool
+from shared_tools.turso_research_record_tool import TursoResearchRecordTool
+from shared_tools.turso_research_sources_tool import TursoResearchSourcesTool
+
 
 @CrewBase
 class DeepResearcher():
@@ -15,6 +18,8 @@ class DeepResearcher():
 
     serper_tool = SerperDevTool(n_results=10)
     pushover_notification_tool = PushoverNotificationTool()
+    turso_research_record_tool = TursoResearchRecordTool()
+    turso_research_sources_tool = TursoResearchSourcesTool()
 
     @agent
     def researcher(self) -> Agent:
@@ -26,9 +31,9 @@ class DeepResearcher():
         )
 
     @agent
-    def reporter(self) -> Agent:
+    def writer(self) -> Agent:
         return Agent(
-            config=self.agents_config['reporter'],
+            config=self.agents_config['writer'],
             verbose=True,
             tools=[],  # No tools for report creation - just writing
         )
@@ -39,6 +44,14 @@ class DeepResearcher():
             config=self.agents_config['translator'],
             verbose=True,
             tools=[],  # No tools for translation - just writing
+        )
+
+    @agent
+    def recorder(self) -> Agent:
+        return Agent(
+            config=self.agents_config['recorder'],
+            verbose=True,
+            tools=[self.turso_research_record_tool, self.turso_research_sources_tool],
         )
 
     @agent
@@ -56,9 +69,9 @@ class DeepResearcher():
         )
 
     @task
-    def reporting_task(self) -> Task:
+    def writing_task(self) -> Task:
         return Task(
-            config=self.tasks_config['reporting_task'],
+            config=self.tasks_config['writing_task'],
             output_file='outputs/report_en.md',
         )
 
@@ -67,6 +80,12 @@ class DeepResearcher():
         return Task(
             config=self.tasks_config['translation_task'],
             output_file='outputs/report_zh.md',
+        )
+
+    @task
+    def recording_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['recording_task'],
         )
 
     @task
