@@ -49,7 +49,7 @@ class TursoResearchSourcesTool(TursoBaseTool):
         
         Args:
             research_id: ID of the research record these sources belong to
-            sources: List of source objects with URL and optional title
+            sources: List of ResearchSource instances
             
         Returns:
             JSON string with status and saved sources
@@ -57,6 +57,11 @@ class TursoResearchSourcesTool(TursoBaseTool):
         conn = self._get_connection()
         try:
             saved_sources = []
+            
+            sources = [
+                ResearchSource(**source) if isinstance(source, dict) else source
+                for source in sources
+            ]
             
             with conn:
                 for source in sources:
@@ -66,25 +71,26 @@ class TursoResearchSourcesTool(TursoBaseTool):
                         """
                         INSERT INTO research_sources (research_id, url, title, domain)
                         VALUES (?, ?, ?, ?)
-                        RETURNING id
+                        RETURNING id, research_id
                         """,
                         [research_id, source.url, source.title, domain],
                     )
                     row = cur.fetchone()
-                    source_id = row[0] if row else None
+                    id, research_id = row if row else (None, None)
                     
                     saved_sources.append({
-                        "id": source_id,
+                        "id": id,
+                        "research_id": research_id,
                         "url": source.url,
                         "title": source.title,
-                        "domain": domain
+                        "domain": domain,
                     })
 
             payload = {
                 "status": "saved",
                 "research_id": research_id,
                 "sources_count": len(saved_sources),
-                "sources": saved_sources
+                "sources": saved_sources,
             }
             return json.dumps(payload)
         except Exception as e:
