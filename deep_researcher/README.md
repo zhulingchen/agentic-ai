@@ -67,25 +67,30 @@ These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, l
 
 ## Database Storage
 
-The Deep Researcher system includes a **TursoResearchRecordTool** that automatically saves all completed research records to a Turso Cloud SQLite database. Each research record includes:
+The Deep Researcher system uses two database tools to automatically save research data to a Turso Cloud SQLite database:
 
-- Research topic
-- Complete English research report
-- Complete Chinese research report
-- Timestamp of when the record was created
+- **TursoResearchRecordTool**: Saves all completed research records, including:
+  - Research topic
+  - Complete English research report
+  - Complete Chinese research report
+  - Timestamp of when the record was created
+- **TursoResearchSourcesTool**: Tracks and saves all research sources/URLs used during the research process, including:
+  - Source URL
+  - Source title (if available)
+  - Timestamp of when the source was accessed
 
-The database tool requires the following environment variables:
+The database tools require the following environment variables:
 - `TURSO_DATABASE_URL` - Your Turso Cloud database URL
 - `TURSO_AUTH_TOKEN` - Your Turso Cloud authentication token
 
 To set up a Turso database:
 1. Sign up for a free account at [Turso](https://turso.tech/)
 2. Create a new database
-3. Run the schema from `databases/deep_researcher_schema.sql` to create the `research_records` table
+3. Run the schema from `databases/deep_researcher_schema.sql` to create the `research_records` and `research_sources` tables
 4. Get your database URL and auth token from the Turso dashboard
 5. Add them to your `.env` file
 
-All research records are automatically archived by the **Recorder** agent, providing a complete history of all research conducted by the system.
+All research records and sources are automatically archived by the **Recorder** agent, providing a complete history of all research conducted and the sources referenced by the system.
 
 ## Support
 
