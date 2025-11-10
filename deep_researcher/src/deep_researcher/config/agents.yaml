@@ -25,7 +25,7 @@ researcher:
     - Diversity of sources: academic, industry, practitioner perspectives
     - Critical analysis: don't just report what exists, evaluate significance and implications
     
-  llm: openai/gpt-5
+  llm: openai/gpt-4o
 
 writer:
   role: >
