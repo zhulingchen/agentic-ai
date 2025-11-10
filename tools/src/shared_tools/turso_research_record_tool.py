@@ -73,7 +73,7 @@ class TursoResearchRecordTool(TursoBaseTool):
                 "status": "OK",
                 "record_id": record_id,
                 "topic": topic,
-                "tags": saved_tags if saved_tags else tags,
+                "tags": saved_tags,
                 "word_count_en": word_count_en,
                 "word_count_zh": word_count_zh,
                 "created_timestamp": created_timestamp,
