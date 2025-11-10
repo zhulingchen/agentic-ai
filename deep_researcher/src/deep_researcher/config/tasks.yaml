@@ -25,16 +25,41 @@ research_task:
     three topics covered superficially.
     
   expected_output: >
-    A deeply researched analysis (800-1200 words) covering ONE specific subtopic in {topic}.
+    You must return a structured ResearchOutput object with the following fields populated:
     
-    Your output MUST include:
-    1. Executive summary (2-3 sentences) explaining why this topic matters now
-    2. Technical deep-dive with specific implementation details, not just concepts
-    3. Real-world applications with named companies/projects and measurable outcomes
-    4. Code snippets or architectural approaches described in detail
-    5. For each GitHub repository (3-5 total): name, stars, what problem it solves, and what makes its approach unique
-    6. Future implications supported by expert opinions or research papers
-    7. All claims cited with source URLs
+    1. topic: The research topic (string)
+
+    2. used_search_queries: List of key search queries that were used (maximum 4 queries)
+
+    3. sources: A list of at least 3 ResearchSource objects. Each source must include:
+       - url: The full URL of the source
+       - title: The title or description of the source
+       - relevance: Why this source is relevant and what information it provides
+       - source_type: Type of source ('academic', 'news', 'blog', 'documentation', 'forum', 'github', etc.)
+       - publication_date: Publication or last updated date if available
+       - key_information: 1-2 sentence summary of key information from this source
+       - quality_score: Quality score of the source (1-10)
+       You must include at least 5 distinct sources with URLs, focusing on developments from the last 3-6 months.
+    
+    4. summary: A comprehensive summary (800-1200 words) covering ONE specific subtopic in {topic}.
+       Include:
+       - Executive summary (2-3 sentences) explaining why this topic matters now
+       - Technical deep-dive with specific implementation details, not just concepts
+       - Real-world applications with named companies/projects and measurable outcomes
+       - Code snippets or architectural approaches described in detail
+       - For each GitHub repository (3-5 total): name, stars, what problem it solves, and what makes its approach unique
+       - Future implications supported by expert opinions or research papers
+       - All claims cited with source URLs
+    
+    5. tags: A list of 3-7 categorical tags for this research (e.g., ['machine-learning', 'python', 'nlp', 'transformer'])
+    
+    6. research_depth: Assessment of research depth - one of: 'surface', 'moderate', or 'comprehensive'
+       (Choose 'comprehensive' if you've thoroughly explored the topic with multiple sources and deep analysis)
+    
+    7. confidence_level: Overall confidence in findings - one of: 'low', 'medium', or 'high'
+       (Choose based on quality and quantity of sources, recency of information, and consistency of findings)
+    
+    8. limitations: Any limitations or gaps identified during research (e.g., limited recent data, conflicting sources, etc.)
     
     Quality standards - your research should include:
     - At least 5 specific examples with company/project names
