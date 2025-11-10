@@ -88,9 +88,8 @@ class TursoResearchSourcesTool(TursoBaseTool):
                     })
 
             payload = {
-                "status": "saved",
+                "status": "OK",
                 "research_id": research_id,
-                "sources_count": len(saved_sources),
                 "sources": saved_sources,
             }
             return json.dumps(payload)

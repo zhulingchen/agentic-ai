@@ -52,7 +52,7 @@ class TursoResearchRecordTool(TursoBaseTool):
                 record_id, created_timestamp = row if row else (None, None)
 
             payload = {
-                "status": "saved",
+                "status": "OK",
                 "record_id": record_id,
                 "topic": topic,
                 "word_count_en": word_count_en,
