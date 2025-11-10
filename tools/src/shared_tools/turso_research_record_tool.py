@@ -1,6 +1,6 @@
 import json
 from pydantic import BaseModel, Field
-from typing import Optional, Type
+from typing import Optional, List, Type
 
 from shared_tools.turso_base_tool import TursoBaseTool
 
@@ -10,8 +10,7 @@ class TursoResearchRecordInput(BaseModel):
     topic: str = Field(..., description="The research topic")
     report_en: str = Field(..., description="The English research report content")
     report_zh: str = Field(..., description="The Chinese research report content")
-    word_count_en: Optional[int] = Field(None, description="Word count of English report")
-    word_count_zh: Optional[int] = Field(None, description="Word count of Chinese report")
+    tags: Optional[List[str]] = Field(None, description="Categorical tags for this research")
 
 
 class TursoResearchRecordTool(TursoBaseTool):
@@ -27,19 +26,18 @@ class TursoResearchRecordTool(TursoBaseTool):
         topic: str,
         report_en: str,
         report_zh: str,
-        word_count_en: Optional[int] = None,
-        word_count_zh: Optional[int] = None,
+        tags: Optional[List[str]] = None,
     ) -> str:
         conn = self._get_connection()
         try:
-            # Calculate word counts if not provided
-            if word_count_en is None:
-                word_count_en = len(report_en.split())
-            if word_count_zh is None:
-                # For Chinese, count characters instead of words
-                word_count_zh = len([c for c in report_zh if c.strip()])
+            # Calculate word counts
+            word_count_en = len(report_en.split())
+
+            # For Chinese, count characters instead of words
+            word_count_zh = len([c for c in report_zh if c.strip()])
 
             with conn:
+                # Insert the research record (without tags column)
                 cur = conn.execute(
                     """
                     INSERT INTO research_records (topic, report_en, report_zh, word_count_en, word_count_zh)
@@ -51,10 +49,31 @@ class TursoResearchRecordTool(TursoBaseTool):
                 row = cur.fetchone()
                 record_id, created_timestamp = row if row else (None, None)
 
+                # Insert tags into research_tags table if provided
+                saved_tags = []
+                if tags and record_id:
+                    for tag in tags:
+                        try:
+                            cur = conn.execute(
+                                """
+                                INSERT INTO research_tags (research_id, tag)
+                                VALUES (?, ?)
+                                RETURNING id
+                                """,
+                                [record_id, tag],
+                            )
+                            tag_row = cur.fetchone()
+                            tag_id = tag_row[0] if tag_row else None
+                            saved_tags.append({"id": tag_id, "tag": tag})
+                        except Exception:
+                            # Ignore duplicate tags (UNIQUE constraint)
+                            pass
+
             payload = {
-                "status": "saved",
+                "status": "OK",
                 "record_id": record_id,
                 "topic": topic,
+                "tags": saved_tags,
                 "word_count_en": word_count_en,
                 "word_count_zh": word_count_zh,
                 "created_timestamp": created_timestamp,

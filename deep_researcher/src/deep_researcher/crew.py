@@ -4,6 +4,7 @@ from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import SerperDevTool
 from typing import List
 
+from deep_researcher.schema import ResearchOutput
 from shared_tools.pushover_tool import PushoverNotificationTool
 from shared_tools.turso_research_record_tool import TursoResearchRecordTool
 from shared_tools.turso_research_sources_tool import TursoResearchSourcesTool
@@ -66,6 +67,7 @@ class DeepResearcher():
     def research_task(self) -> Task:
         return Task(
             config=self.tasks_config['research_task'],
+            output_pydantic=ResearchOutput,
         )
 
     @task

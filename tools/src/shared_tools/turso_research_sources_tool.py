@@ -5,6 +5,7 @@ from urllib.parse import urlparse
 
 from shared_tools.turso_base_tool import TursoBaseTool
 
+
 class ResearchSource(BaseModel):
     """A single research source."""
     url: str = Field(..., description="The URL of the source")
@@ -87,9 +88,8 @@ class TursoResearchSourcesTool(TursoBaseTool):
                     })
 
             payload = {
-                "status": "saved",
+                "status": "OK",
                 "research_id": research_id,
-                "sources_count": len(saved_sources),
                 "sources": saved_sources,
             }
             return json.dumps(payload)

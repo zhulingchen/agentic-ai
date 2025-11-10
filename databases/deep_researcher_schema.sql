@@ -16,3 +16,11 @@ CREATE TABLE IF NOT EXISTS research_sources (
     domain TEXT,
     FOREIGN KEY (research_id) REFERENCES research_records(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS research_tags (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    research_id INTEGER NOT NULL,
+    tag TEXT NOT NULL,
+    FOREIGN KEY (research_id) REFERENCES research_records(id) ON DELETE CASCADE,
+    UNIQUE(research_id, tag)
+);

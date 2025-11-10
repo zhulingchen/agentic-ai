@@ -37,7 +37,7 @@ class PushoverNotificationTool(BaseTool):
         
         for i, msg_part in enumerate(messages):
             part_title = f"{title} (Part {i+1}/{len(messages)})" if len(messages) > 1 else title
-            payload = {
+            msg_payload = {
                 "user": pushover_user,
                 "token": pushover_token,
                 "title": part_title,
@@ -45,16 +45,22 @@ class PushoverNotificationTool(BaseTool):
             }
             
             try:
-                response = requests.post(pushover_url, data=payload)
+                response = requests.post(pushover_url, data=msg_payload)
                 response.raise_for_status()
-                results.append(f"Part {i+1}: OK")
+                result_payload = {
+                    "status": "OK",
+                    "part": i+1,
+                }
             except requests.exceptions.RequestException as e:
-                results.append(f"Part {i+1}: Error - {str(e)}")
-        
-        payload = {
-            "notification": "sent",
-            "results": results,
-        }
+                result_payload = {
+                    "status": "error",
+                    "part": i+1,
+                    "message": str(e),
+                }
+            
+            results.append(result_payload)
+
+        payload = {"results": results}
         return json.dumps(payload)
     
     def _split_message(self, message: str, max_length: int) -> list:
