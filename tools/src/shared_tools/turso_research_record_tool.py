@@ -36,26 +36,44 @@ class TursoResearchRecordTool(TursoBaseTool):
             # For Chinese, count characters instead of words
             word_count_zh = len([c for c in report_zh if c.strip()])
 
-            # Convert tags to JSON string to save to database as TEXT
-            tags_json = json.dumps(tags) if tags else None
-
             with conn:
+                # Insert the research record (without tags column)
                 cur = conn.execute(
                     """
-                    INSERT INTO research_records (topic, tags, report_en, report_zh, word_count_en, word_count_zh)
-                    VALUES (?, ?, ?, ?, ?, ?)
+                    INSERT INTO research_records (topic, report_en, report_zh, word_count_en, word_count_zh)
+                    VALUES (?, ?, ?, ?, ?)
                     RETURNING id, created_timestamp
                     """,
-                    [topic, tags_json, report_en, report_zh, word_count_en, word_count_zh],
+                    [topic, report_en, report_zh, word_count_en, word_count_zh],
                 )
                 row = cur.fetchone()
                 record_id, created_timestamp = row if row else (None, None)
+
+                # Insert tags into research_tags table if provided
+                saved_tags = []
+                if tags and record_id:
+                    for tag in tags:
+                        try:
+                            cur = conn.execute(
+                                """
+                                INSERT INTO research_tags (research_id, tag)
+                                VALUES (?, ?)
+                                RETURNING id
+                                """,
+                                [record_id, tag],
+                            )
+                            tag_row = cur.fetchone()
+                            tag_id = tag_row[0] if tag_row else None
+                            saved_tags.append({"id": tag_id, "tag": tag})
+                        except Exception:
+                            # Ignore duplicate tags (UNIQUE constraint)
+                            pass
 
             payload = {
                 "status": "OK",
                 "record_id": record_id,
                 "topic": topic,
-                "tags": tags,
+                "tags": saved_tags if saved_tags else tags,
                 "word_count_en": word_count_en,
                 "word_count_zh": word_count_zh,
                 "created_timestamp": created_timestamp,
